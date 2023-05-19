@@ -1,2 +1,1 @@
-# CustomizableUI
- 
+# I Whish They Made UI Customizable - a KSP2 plugin
