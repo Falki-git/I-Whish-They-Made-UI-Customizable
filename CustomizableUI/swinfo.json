@@ -1,0 +1,22 @@
+{
+  "mod_id": "CustomizableUI",
+  "author": "Falki",
+  "name": "I Whish They Made UI Customizable",
+  "description": "",
+  "source": "",
+  "version": "0.1.0",
+  "version_check": "",
+  "dependencies": [
+    {
+      "id":  "SpaceWarp",
+      "version": {
+        "min": "1.1.1",
+        "max": "*"
+      }
+    }
+  ],
+  "ksp2_version": {
+    "min": "0.1.0",
+    "max": "*"
+  }
+}
