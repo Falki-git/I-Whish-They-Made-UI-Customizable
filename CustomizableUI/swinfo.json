@@ -1,11 +1,11 @@
 {
   "mod_id": "CustomizableUI",
   "author": "Falki",
-  "name": "I Whish They Made UI Customizable",
-  "description": "",
+  "name": "I Wish They Made UI Customizable",
+  "description": "Move flight UI elements wherever you want.",
   "source": "",
   "version": "0.1.0",
-  "version_check": "",
+  "version_check": "https://raw.githubusercontent.com/Falki-git/I-Wish-They-Made-UI-Customizable/master/CustomizableUI/swinfo.json",
   "dependencies": [
     {
       "id":  "SpaceWarp",

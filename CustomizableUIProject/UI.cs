@@ -35,7 +35,7 @@ namespace CustomizableUI
                     GUIUtility.GetControlID(FocusType.Passive),
                     _windowRect,
                     FillWindow,
-                    "// I Whish They Made UI Customizable",
+                    "// I Wish They Made UI Customizable",
                     GUILayout.Height(0),
                     GUILayout.Width(Styles.WindowWidth)
                 );
