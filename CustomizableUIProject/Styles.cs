@@ -74,7 +74,7 @@ namespace CustomizableUI
         private static void InitializeTextures()
         {
             // Icons from https://icons8.com
-            CloseButtonTexture = LoadTexture($"{CustomizableUIPlugin.Instance.SpaceWarpMetadata.ModID}/images/close-15.png");
+            CloseButtonTexture = LoadTexture($"{CustomizableUIPlugin.Instance.Info.Metadata.GUID}/images/close-15.png");
         }
 
         private static Texture2D LoadTexture(string path)
