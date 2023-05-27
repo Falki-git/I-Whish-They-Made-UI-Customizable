@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using KSP.Game;
 using KSP.Messages;
-using KSP.UI.Binding;
 using UnityEngine;
 
 namespace CustomizableUI
@@ -32,6 +31,16 @@ namespace CustomizableUI
             }
         }
 
+        public void Update()
+        {
+            // I wish we don't have to do this, but initialization often fails when triggered via OnGameStateEntered, since the app.bar sometimes doesn't finish initializing when scene is triggered
+            if (!IsInitialized && Utility.Instance.GameState == GameState.FlightView)
+            {
+                Initialize();
+                Utility.Instance.LoadData();
+            }
+        }
+
         public void Initialize()
         {
             try
@@ -53,16 +62,10 @@ namespace CustomizableUI
         {
             _logger.LogInfo("OnGameStateEntered triggered.");
 
-            if (/*!IsInitialized && */Utility.Instance.GameState == GameState.FlightView)
+            if (Utility.Instance.GameState == GameState.FlightView)
             {
                 Initialize();
                 Utility.Instance.LoadData();
-
-                // Temporary
-                /*
-                UI.Instance.IsWindowOpen = true;
-                GameObject.Find("BTN-CustomizableUI")?.GetComponent<UIValue_WriteBool_Toggle>()?.SetValue(true);
-                */
             }
 
         }
@@ -106,7 +109,6 @@ namespace CustomizableUI
                     group.Transform.position += deltaDistance;
                     group.Position += deltaDistance;
                 }
-
             }
         }
 

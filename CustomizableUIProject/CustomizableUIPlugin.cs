@@ -35,7 +35,7 @@ public class CustomizableUIPlugin : BaseSpaceWarpPlugin
         Appbar.RegisterAppButton(
             "IWTM UI Customizable",
             ToolbarFlightButtonID,
-            AssetManager.GetAsset<Texture2D>($"{SpaceWarpMetadata.ModID}/images/icon.png"),
+            AssetManager.GetAsset<Texture2D>($"{Info.Metadata.GUID}/images/icon.png"),
             isOpen =>
             {
                 UI.Instance.IsWindowOpen = isOpen;
@@ -65,5 +65,7 @@ public class CustomizableUIPlugin : BaseSpaceWarpPlugin
     private void OnGUI()
     {
         UI.Instance.OnGUI();
-    }     
+    }
+
+    public void Update() => Manager.Instance.Update();
 }
