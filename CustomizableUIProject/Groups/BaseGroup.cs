@@ -59,17 +59,17 @@ namespace CustomizableUI
 
         public void MoveToHorizontalCenter()
         {
-            Transform.position = new Vector3(0f + OffsetToZero.x + Screen.width/2 - RectTransform.rect.width/2 + ToCenterOffset.x, Transform.position.y, Transform.position.z);
+            Transform.position = new Vector3(0f + OffsetToZero.x + Screen.width/2 - RectTransform.rect.width/2 * Manager.Instance.ScaleFactor + ToCenterOffset.x, Transform.position.y, Transform.position.z);
         }
 
         public void MoveToVerticalCenter()
         {
-            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y + Screen.height/2 - RectTransform.rect.height/2 +ToCenterOffset.y, Transform.position.z);
+            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y + Screen.height/2 - RectTransform.rect.height/2 * Manager.Instance.ScaleFactor + ToCenterOffset.y, Transform.position.z);
         }
 
         public void MoveToTop()
         {
-            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y + Screen.height - RectTransform.rect.height + ToMaxOffset.y, Transform.position.z);
+            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y + Screen.height - RectTransform.rect.height * Manager.Instance.ScaleFactor + ToMaxOffset.y, Transform.position.z);
         }
         public void MoveToBottom()
         {
@@ -83,7 +83,7 @@ namespace CustomizableUI
 
         public void MoveToFarRight()
         {
-            Transform.position = new Vector3(0f + OffsetToZero.x + Screen.width - RectTransform.rect.width + ToMaxOffset.x, Transform.position.y, Transform.position.z);
+            Transform.position = new Vector3(0f + OffsetToZero.x + Screen.width - RectTransform.rect.width * Manager.Instance.ScaleFactor + ToMaxOffset.x, Transform.position.y, Transform.position.z);
         }
 
         public void AdjustScale()
