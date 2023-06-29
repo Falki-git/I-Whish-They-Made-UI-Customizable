@@ -19,6 +19,8 @@ namespace CustomizableUI
         [JsonProperty]
         private bool isActive;
 
+        public RectTransform RectTransform;
+
         public bool IsActive
         {
             get => isActive;

@@ -9,7 +9,7 @@ namespace CustomizableUI
     {
         private static Manager _instance;
         private ManualLogSource _logger = BepInEx.Logging.Logger.CreateLogSource("CustomizableUI.Manager");
-        private Canvas _mainCanvas => GameManager.Instance?.Game?.UI?._mainCanvas;
+        private Canvas _mainCanvas => GameManager.Instance?.Game?.UI?._scaledMainCanvas;
 
         public Transform FlightHud => _mainCanvas?.gameObject?.GetChild("FlightHudRoot(Clone)")?.transform;
         public List<TopLevelGroup> Groups { get; set; }

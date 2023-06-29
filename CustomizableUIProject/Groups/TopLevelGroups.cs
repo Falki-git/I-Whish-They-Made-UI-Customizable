@@ -22,6 +22,7 @@ namespace CustomizableUI
             Children = ChildGroup.GetAllChildren(Transform, this);
             DefaultPosition = Position = Transform.position;
             IsActive = Transform.gameObject.activeSelf;
+            RectTransform = Manager.Instance.FlightHud.gameObject.GetChild(groupName).transform.GetChild(transformIndex).GetComponent<RectTransform>();
         }
 
         public static int SelectedIndex = 0;
@@ -183,7 +184,7 @@ namespace CustomizableUI
     {
         public AppBar()
         {
-            Transform = GameManager.Instance.Game.UI._popupCanvas.gameObject.GetChild("Container").GetChild("ButtonBar").transform;
+            Transform = GameManager.Instance.Game.UI._scaledPopupCanvas.gameObject.GetChild("Container").GetChild("ButtonBar").transform;
             Name = Utility.Instance.GetGroupName(Transform.name);
             Children = ChildGroup.GetAllChildren(Transform, this);
             DefaultPosition = Position = Transform.position;
