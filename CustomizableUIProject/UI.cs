@@ -118,10 +118,10 @@ namespace CustomizableUI
             float verticalMinLimit = topGroup is AppBar ? 0 : - 1080 / 2;
             float verticalMaxLimit = topGroup is AppBar ? Screen.height : 1080 / 2;
             */
-            float horizontalMinLimit = 0;
-            float horizontalMaxLimit = Screen.width;
-            float verticalMinLimit = 0;
-            float verticalMaxLimit = Screen.height;
+            float horizontalMinLimit = 0 + topGroup.OffsetToZero.x;
+            float horizontalMaxLimit = Screen.width + topGroup.OffsetToZero.x - topGroup.RectTransform.rect.width + topGroup.ToMaxOffset.x;
+            float verticalMinLimit = 0 + topGroup.OffsetToZero.y;
+            float verticalMaxLimit = Screen.height + topGroup.OffsetToZero.y - topGroup.RectTransform.rect.height + topGroup.ToMaxOffset.y;
 
             topGroup.Position = topGroup.Transform.position = new Vector3(GUILayout.HorizontalSlider(topGroup.Transform.position.x, horizontalMinLimit, horizontalMaxLimit), topGroup.Transform.position.y, topGroup.Transform.position.z);
             topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, GUILayout.HorizontalSlider(topGroup.Transform.position.y, verticalMinLimit, verticalMaxLimit), topGroup.Transform.position.z);

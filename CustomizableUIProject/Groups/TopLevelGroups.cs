@@ -22,7 +22,8 @@ namespace CustomizableUI
             Children = ChildGroup.GetAllChildren(Transform, this);
             DefaultPosition = Position = Transform.position;
             IsActive = Transform.gameObject.activeSelf;
-            RectTransform = Manager.Instance.FlightHud.gameObject.GetChild(groupName).transform.GetChild(transformIndex).GetComponent<RectTransform>();
+            IsActive = true;
+            RectTransform = Transform.GetComponent<RectTransform>();
         }
 
         public static int SelectedIndex = 0;
@@ -56,8 +57,10 @@ namespace CustomizableUI
     {
         public GameView() : base ("group_gameview(Clone)", 0)
         {
-            ToCenterOffset.x = -68;
-            ToCenterOffset.y = -28;
+            ToCenterOffset.x = 0;
+            ToCenterOffset.y = -15;
+            OffsetToZero.x = 0;
+            OffsetToZero.y = 0;
         }
     }
 
@@ -65,8 +68,12 @@ namespace CustomizableUI
     {
         public VerticalSpeed() : base("widget_indicator_verticalspeed_horizontal_new(Clone)", 0)
         {
-            ToCenterOffset.x = -42.5f;
-            ToCenterOffset.y = -70f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 586;
+            OffsetToZero.y = 305;
+            ToMaxOffset.x = 20;
+            ToMaxOffset.y = -39;
             AttachToNavball = true;
         }
     }
@@ -75,8 +82,12 @@ namespace CustomizableUI
     {
         public GoButton() : base("group_gobutton(Clone)", 0)
         {
-            ToCenterOffset.x = 104f;
-            ToCenterOffset.y = -36f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 208;
+            OffsetToZero.y = 0;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -84,8 +95,12 @@ namespace CustomizableUI
     {
         public OrbitalReadout() : base("OrbitalReadoutInstrument_Widget(Clone)", 0)
         {
-            ToCenterOffset.x = -120f;
-            ToCenterOffset.y = -28f;
+            ToCenterOffset.x = -70f;
+            ToCenterOffset.y = 22f;
+            OffsetToZero.x = 838;
+            OffsetToZero.y = 524;
+            ToMaxOffset.x = -139;
+            ToMaxOffset.y = 46;
         }
     }
 
@@ -93,8 +108,12 @@ namespace CustomizableUI
     {
         public BurnTimer() : base("group_burntimer(Clone)", 1)
         {
-            ToCenterOffset.x = -204f;
-            ToCenterOffset.y = -72f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 0;
+            OffsetToZero.y = 0;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -102,8 +121,12 @@ namespace CustomizableUI
     {
         public Instruments() : base("group_instruments(Clone)", 0)
         {
-            ToCenterOffset.x = -155f;
-            ToCenterOffset.y = -28f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 0;
+            OffsetToZero.y = 0;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -111,8 +134,12 @@ namespace CustomizableUI
     {
         public AtmosphericIndicator() : base("group_atmospheric_indicator(Clone)", 0)
         {
-            ToCenterOffset.x = -42.5f;
-            ToCenterOffset.y = -70f;
+            ToCenterOffset.x = 0;
+            ToCenterOffset.y = -14f;
+            OffsetToZero.x = 586;
+            OffsetToZero.y = 452;
+            ToMaxOffset.x = 16;
+            ToMaxOffset.y = -39;
             AttachToNavball = true;
         }
     }
@@ -120,8 +147,12 @@ namespace CustomizableUI
     {
         public IvaPortraits() : base("group_ivaportraits(Clone)", 0)
         {
-            ToCenterOffset.x = 206.5f;
-            ToCenterOffset.y = 60f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 283;
+            OffsetToZero.y = 120;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -129,8 +160,12 @@ namespace CustomizableUI
     {
         public FlightControl() : base("group_flightcontrol(Clone)", 0)
         {
-            ToCenterOffset.x = -88f;
-            ToCenterOffset.y = -120f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 0;
+            OffsetToZero.y = 0;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -138,8 +173,12 @@ namespace CustomizableUI
     {
         public ActionBar() : base("group_actionbar(Clone)", 0)
         {
-            ToCenterOffset.x = -28f;
-            ToCenterOffset.y = 108f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 4;
+            OffsetToZero.y = 216;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -147,8 +186,12 @@ namespace CustomizableUI
     {
         public Resources() : base("NonStageableResources(Clone)", 0)
         {
-            ToCenterOffset.x = 104f;
-            ToCenterOffset.y = 60f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 208;
+            OffsetToZero.y = 120;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -156,8 +199,12 @@ namespace CustomizableUI
     {
         public Navball() : base("group_navball(Clone)", 0)
         {
-            ToCenterOffset.x = -150f;
-            ToCenterOffset.y = -150f;
+            ToCenterOffset.x = -37f;
+            ToCenterOffset.y = 0;
+            OffsetToZero.x = 36;
+            OffsetToZero.y = 0;
+            ToMaxOffset.x = -73;
+            ToMaxOffset.y = -20;
         }
     }
 
@@ -165,8 +212,12 @@ namespace CustomizableUI
     {
         public Staging() : base("group_flightstaging(Clone)", 0)
         {
-            ToCenterOffset.x = 130f;
-            ToCenterOffset.y = -55f;
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 240;
+            OffsetToZero.y = -24;
+            ToMaxOffset.x = 57;
+            ToMaxOffset.y = 0;
         }
     }
 
@@ -174,8 +225,12 @@ namespace CustomizableUI
     {
         public Throttle() : base("group_throttle(Clone)", 0)
         {
-            ToCenterOffset.x = -42.5f;
-            ToCenterOffset.y = -145f;
+            ToCenterOffset.x = -0;
+            ToCenterOffset.y = -110f;
+            OffsetToZero.x = 60;
+            OffsetToZero.y = 63;
+            ToMaxOffset.x = 15;
+            ToMaxOffset.y = -197;
             AttachToNavball = true;
         }
     }
@@ -188,9 +243,15 @@ namespace CustomizableUI
             Name = Utility.Instance.GetGroupName(Transform.name);
             Children = ChildGroup.GetAllChildren(Transform, this);
             DefaultPosition = Position = Transform.position;
-
-            ToCenterOffset.x = 1270f;
-            ToCenterOffset.y = 672f;
+            IsActive = Transform.gameObject.activeSelf;
+            IsActive = true;
+            RectTransform = Transform.GetComponent<RectTransform>();
+            ToCenterOffset.x = 0f;
+            ToCenterOffset.y = 0f;
+            OffsetToZero.x = 84;
+            OffsetToZero.y = 0;
+            ToMaxOffset.x = 0;
+            ToMaxOffset.y = 0;
         }
     }
 }

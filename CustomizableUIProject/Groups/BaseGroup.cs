@@ -14,6 +14,8 @@ namespace CustomizableUI
         public int SelectedChild = 0;
         public Vector3 DefaultPosition;
         public Vector2 ToCenterOffset;
+        public Vector2 OffsetToZero;
+        public Vector2 ToMaxOffset;
         [JsonProperty]
         public Vector3 Position;
         [JsonProperty]
@@ -57,12 +59,12 @@ namespace CustomizableUI
 
         public void MoveToHorizontalCenter()
         {
-            Transform.position = new Vector3(0f + ToCenterOffset.x, Transform.position.y, Transform.position.z);
+            Transform.position = new Vector3(0f + OffsetToZero.x + Screen.width/2 - RectTransform.rect.width/2 + ToCenterOffset.x, Transform.position.y, Transform.position.z);
         }
 
         public void MoveToVerticalCenter()
         {
-            Transform.position = new Vector3(Transform.position.x, 0f + ToCenterOffset.y, Transform.position.z);
+            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y + Screen.height/2 - RectTransform.rect.height/2 +ToCenterOffset.y, Transform.position.z);
         }
 
         public void MoveToTop()
