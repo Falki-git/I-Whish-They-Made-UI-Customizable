@@ -112,10 +112,17 @@ namespace CustomizableUI
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
+            /*
             float horizontalMinLimit = topGroup is AppBar ? 0 :  -1920 / 2;
             float horizontalMaxLimit = topGroup is AppBar ? Screen.width :  1920 / 2;
             float verticalMinLimit = topGroup is AppBar ? 0 : - 1080 / 2;
             float verticalMaxLimit = topGroup is AppBar ? Screen.height : 1080 / 2;
+            */
+            float horizontalMinLimit = 0;
+            float horizontalMaxLimit = Screen.width;
+            float verticalMinLimit = 0;
+            float verticalMaxLimit = Screen.height;
+
             topGroup.Position = topGroup.Transform.position = new Vector3(GUILayout.HorizontalSlider(topGroup.Transform.position.x, horizontalMinLimit, horizontalMaxLimit), topGroup.Transform.position.y, topGroup.Transform.position.z);
             topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, GUILayout.HorizontalSlider(topGroup.Transform.position.y, verticalMinLimit, verticalMaxLimit), topGroup.Transform.position.z);
             topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, topGroup.Transform.position.y, GUILayout.HorizontalSlider(topGroup.Transform.position.z, -5000, 5000));
