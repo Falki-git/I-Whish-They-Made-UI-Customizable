@@ -135,6 +135,14 @@ namespace CustomizableUI
                 topGroup.MoveToHorizontalCenter();
             if (NormalButton("Move to Vertical center"))
                 topGroup.MoveToVerticalCenter();
+            if (NormalButton("Move to Top"))
+                topGroup.MoveToTop();
+            if (NormalButton("Move to Bottom"))
+                topGroup.MoveToBottom();
+            if (NormalButton("Move to Far Left"))
+                topGroup.MoveToFarLeft();
+            if (NormalButton("Move to Far Right"))
+                topGroup.MoveToFarRight();
             if (NormalButton("Reset"))
                 topGroup.ResetToDefault();
             GUILayout.EndHorizontal();

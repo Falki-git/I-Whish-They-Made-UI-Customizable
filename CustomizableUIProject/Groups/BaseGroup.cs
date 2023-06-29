@@ -69,21 +69,21 @@ namespace CustomizableUI
 
         public void MoveToTop()
         {
-            // TODO
+            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y + Screen.height - RectTransform.rect.height + ToMaxOffset.y, Transform.position.z);
         }
         public void MoveToBottom()
         {
-            // TODO
+            Transform.position = new Vector3(Transform.position.x, 0f + OffsetToZero.y, Transform.position.z);
         }
 
         public void MoveToFarLeft()
         {
-            // TODO
+            Transform.position = new Vector3(0f + OffsetToZero.x, Transform.position.y, Transform.position.z);
         }
 
         public void MoveToFarRight()
         {
-            // TODO
+            Transform.position = new Vector3(0f + OffsetToZero.x + Screen.width - RectTransform.rect.width + ToMaxOffset.x, Transform.position.y, Transform.position.z);
         }
 
         public void AdjustScale()
