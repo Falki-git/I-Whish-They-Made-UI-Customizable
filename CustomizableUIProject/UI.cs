@@ -172,15 +172,21 @@ namespace CustomizableUI
             // Since Transform.position (0, 0, z) indicates a pixel at the middle of the screen and since each UI group can be offset differently, we need to do some algebra hacks.
             // Reference resolution is 1920 x 1080, but Main canvas uses something more like 1815 x 1023 (?!). 907.5 is half of horizontal res, 511.5 half of vertical.
 
-            float topGroupPercent_X = (topGroup.Transform.position.x + 907.5f - (topGroup.ToCenterOffset.x + topGroupRect.width / 2)) / 1815.0f;            
-            _overlay.x = Screen.width * topGroupPercent_X;
+            float topGroupPercent_X = (topGroup.Transform.position.x + 907.5f - (topGroup.ToCenterOffset.x + topGroupRect.width / 2)) / 1815.0f;
+            //_overlay.x = Screen.width * topGroupPercent_X;
+            _overlay.x = 0f + topGroup.Position.x - topGroup.OffsetToZero.x;
 
             // For Y, Transform.position and IMGUI coordinates are reversed. Transfer.position counts bottom-up and IMGUI draws up-bottom. So we reverse the percent.
-            float topGroupPercent_Y = (topGroup.Transform.position.y + 511.5f - topGroup.ToCenterOffset.y + topGroupRect.height / 2) / 1023.0f;            
-            _overlay.y = Screen.height * (1 - topGroupPercent_Y);
+            float topGroupPercent_Y = (topGroup.Transform.position.y + 511.5f - topGroup.ToCenterOffset.y + topGroupRect.height / 2) / 1023.0f;
+            //_overlay.y = Screen.height * (1 - topGroupPercent_Y);
+            _overlay.y = 0f + topGroup.Position.y - topGroup.OffsetToZero.y;
 
-            _overlay.width = topGroupRect.width * Manager.Instance.ScaleFactor;
-            _overlay.height = topGroupRect.height * Manager.Instance.ScaleFactor;
+            // Since IMGUI draws from the top-left corner and position is from the bottom-left, we need to inverse to y coordinate
+            _overlay.y = Screen.height - _overlay.y - (topGroupRect.height * Manager.Instance.ScaleFactor);
+
+            
+            _overlay.width = topGroupRect.width * Manager.Instance.ScaleFactor;            
+            _overlay.height = (topGroupRect.height + topGroup.ToMaxOffset.y) * Manager.Instance.ScaleFactor;
 
             var previousColor = GUI.color;
             // color the overlay in transparent yellow
