@@ -1,6 +1,4 @@
-﻿using KSP.Game;
-using KSP.UI;
-using KSP.UI.Binding;
+﻿using KSP.UI.Binding;
 using UnityEngine;
 
 namespace CustomizableUI
@@ -8,12 +6,19 @@ namespace CustomizableUI
     public class UI
     {
         private static UI _instance;
-
-        public bool IsWindowOpen;
         private Rect _windowRect = new Rect(Screen.width / 2 - Styles.WindowWidth / 2, 200, 0, 0);
         private Rect _overlay = new Rect();
-        //private Rect scaleFactorRect = new Rect(0, 0, 0, 0);
 
+        private bool _nudgeLeft;
+        private bool _nudgeRight;
+        private bool _nudgeUp;
+        private bool _nudgeDown;
+
+        private bool _printMessage;
+        private string _message;
+        private float _messageTime;
+
+        public bool IsWindowOpen;
 
         private UI()
         { }
@@ -69,6 +74,8 @@ namespace CustomizableUI
 
         private void FillWindow(int _)
         {
+            // ▼▶◀▲▿▹◃▵
+
             if (CloseButton())
                 CloseWindow();
 
@@ -112,40 +119,194 @@ namespace CustomizableUI
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            float horizontalMinLimit = topGroup is AppBar ? 0 :  -1920 / 2;
-            float horizontalMaxLimit = topGroup is AppBar ? Screen.width :  1920 / 2;
-            float verticalMinLimit = topGroup is AppBar ? 0 : - 1080 / 2;
-            float verticalMaxLimit = topGroup is AppBar ? Screen.height : 1080 / 2;
-            topGroup.Position = topGroup.Transform.position = new Vector3(GUILayout.HorizontalSlider(topGroup.Transform.position.x, horizontalMinLimit, horizontalMaxLimit), topGroup.Transform.position.y, topGroup.Transform.position.z);
-            topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, GUILayout.HorizontalSlider(topGroup.Transform.position.y, verticalMinLimit, verticalMaxLimit), topGroup.Transform.position.z);
-            topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, topGroup.Transform.position.y, GUILayout.HorizontalSlider(topGroup.Transform.position.z, -5000, 5000));
-            GUILayout.EndHorizontal();
+            {
+                float horizontalMinLimit = 0 + topGroup.OffsetToZero.x;
+                float horizontalMaxLimit = Screen.width + topGroup.OffsetToZero.x - topGroup.RectTransform.rect.width + topGroup.ToMaxOffset.x;
+                float verticalMinLimit = 0 + topGroup.OffsetToZero.y;
+                float verticalMaxLimit = Screen.height + topGroup.OffsetToZero.y - topGroup.RectTransform.rect.height + topGroup.ToMaxOffset.y;
+
+                topGroup.Position = topGroup.Transform.position = new Vector3(GUILayout.HorizontalSlider(topGroup.Transform.position.x, horizontalMinLimit, horizontalMaxLimit), topGroup.Transform.position.y, topGroup.Transform.position.z);
+                topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, GUILayout.HorizontalSlider(topGroup.Transform.position.y, verticalMinLimit, verticalMaxLimit), topGroup.Transform.position.z);
+                topGroup.Position = topGroup.Transform.position = new Vector3(topGroup.Transform.position.x, topGroup.Transform.position.y, GUILayout.HorizontalSlider(topGroup.Transform.position.z, -5000, 5000));
+                GUILayout.EndHorizontal();
+            }
 
             GUILayout.Space(20);
 
             GUILayout.BeginHorizontal();
-            if (NormalButton("Move to Horizontal center"))
-                topGroup.MoveToHorizontalCenter();
-            if (NormalButton("Move to Vertical center"))
-                topGroup.MoveToVerticalCenter();
-            if (NormalButton("Reset"))
-                topGroup.ResetToDefault();
-            GUILayout.EndHorizontal();
+            {
 
+                GUILayout.BeginVertical(new GUIStyle { fixedWidth = 50 });
+                GUILayout.EndVertical();
+
+                GUILayout.BeginVertical();
+                {
+                    // TOP ROW
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.FlexibleSpace();
+                        if (JumpUpDownButton("▲ ▲"))
+                        {
+                            if (topGroup.Position.y < topGroup.VerticalLowerMiddle)
+                                topGroup.MoveToVerticalLowerMiddle();
+                            else if (topGroup.Position.y < topGroup.VerticalCenter)
+                                topGroup.MoveToVerticalCenter();
+                            else if (topGroup.Position.y < topGroup.VerticalUpperMiddle)
+                                topGroup.MoveToVerticalUpperMiddle();
+                            else
+                                topGroup.MoveToVerticalUpperTop();
+                        }
+
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                    }
+
+                    // MIDDLE ROW
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.FlexibleSpace();
+                        if (JumpLeftRightButton("◀\n◀"))
+                        {
+                            if (topGroup.Position.x > topGroup.HorizontalRightMiddle)
+                                topGroup.MoveToHorizontalRightMiddle();
+                            else if (topGroup.Position.x > topGroup.HorizontalCenter)
+                                topGroup.MoveToHorizontalCenter();
+                            else if (topGroup.Position.x > topGroup.HorizontalLeftMiddle)
+                                topGroup.MoveToHorizontalLeftMiddle();
+                            else
+                                topGroup.MoveToHorizontalLeftFar();
+                        }
+
+                        GUILayout.BeginVertical();
+                        {
+                            GUILayout.BeginHorizontal();
+                            {
+                                GUILayout.Space(40);
+                                MoveButton("▲", "up");
+                                GUILayout.Space(40);
+                                GUILayout.EndHorizontal();
+                            }
+                            GUILayout.BeginHorizontal();
+                            {
+                                MoveButton("◀", "left");
+                                GUILayout.Space(40);
+                                MoveButton("▶", "right");
+                                GUILayout.EndHorizontal();
+                            }
+                            GUILayout.BeginHorizontal();
+                            {
+                                GUILayout.Space(40);
+                                MoveButton("▼", "down");
+                                GUILayout.Space(40);
+                                GUILayout.EndHorizontal();
+                            }
+                            GUILayout.EndVertical();
+                        }
+
+                        if (JumpLeftRightButton("▶\n▶"))
+                        {
+                            if (topGroup.Position.x < topGroup.HorizontalLeftMiddle)
+                                topGroup.MoveToHorizontalLeftMiddle();
+                            else if (topGroup.Position.x < topGroup.HorizontalCenter)
+                                topGroup.MoveToHorizontalCenter();
+                            else if (topGroup.Position.x < topGroup.HorizontalRightMiddle)
+                                topGroup.MoveToHorizontalRightMiddle();
+                            else
+                                topGroup.MoveToHorizontalRightFar();
+                        }
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                    }
+
+                    // BOTTOM ROW
+                    GUILayout.BeginHorizontal();
+                    {
+                        GUILayout.FlexibleSpace();
+                        if (JumpUpDownButton("▼ ▼"))
+                        {
+                            if (topGroup.Position.y > topGroup.VerticalUpperMiddle)
+                                topGroup.MoveToVerticalUpperMiddle();
+                            else if (topGroup.Position.y > topGroup.VerticalCenter)
+                                topGroup.MoveToVerticalCenter();
+                            else if (topGroup.Position.y > topGroup.VerticalLowerMiddle)
+                                topGroup.MoveToVerticalLowerMiddle();
+                            else
+                                topGroup.MoveToVerticalLowerBottom();
+                        }
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                    }
+
+                    NudgeGroup(topGroup);
+
+                    GUILayout.EndVertical();
+                }
+
+                GUILayout.Space(-100);
+                GUILayout.BeginVertical(new GUIStyle { fixedWidth = 100 });
+                {
+                    GUILayout.FlexibleSpace();
+
+                    if (NormalButton("Reset"))
+                    {
+                        topGroup.ResetToDefault();
+                        PrintMessage($"Group {topGroup.Name} reset.");
+                    }
+                    if (NormalButton("FUBAR"))
+                    {
+                        Manager.Instance.ResetAllToDefault();
+                        PrintMessage("Layout reset to initial state.");
+                    }
+
+                    GUILayout.FlexibleSpace();
+                    GUILayout.EndVertical();
+                }
+
+                GUILayout.EndHorizontal();
+            }
             Manager.Instance.RecalculatePositionsOfGroupsAttachedToNavball(topGroup, previousPosition);
 
             GUILayout.Space(20);
 
+            
+            // Save and Load buttons
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Save"))
-                Utility.Instance.SaveData();
-            if (GUILayout.Button("Load"))
-                Utility.Instance.LoadData();
-            if (NormalButton("FUBAR"))
-                Manager.Instance.ResetAllToDefault();
-            GUILayout.EndHorizontal();
+            {
+                if (GUILayout.Button("Save"))
+                {
+                    Utility.Instance.SaveData();
+                    PrintMessage("Layout saved.");
+                }
+                if (GUILayout.Button("Load"))
+                {
+                    Utility.Instance.LoadData();
+                    PrintMessage("Layout loaded.");
+                }
+                GUILayout.EndHorizontal();
+            }
+
+            // Draw message
+            if (Time.time - _messageTime < 2)
+            {
+                GUILayout.BeginVertical();
+                GUILayout.Label("--");
+                GUILayout.Label(_message, Styles.MessageLabel);
+                GUILayout.EndVertical();
+            }
 
             GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
+        }        
+
+        private void NudgeGroup(TopLevelGroup group)
+        {
+            if (_nudgeLeft)
+                group.NudgeLeft();
+            if (_nudgeRight)
+                group.NudgeRight();
+            if (_nudgeUp)
+                group.NudgeUp();
+            if (_nudgeDown)
+                group.NudgeDown();
         }
 
         private void DrawOverlayOverSelectedGroup()
@@ -153,19 +314,14 @@ namespace CustomizableUI
             var topGroup = Manager.Instance.Groups[TopLevelGroup.SelectedIndex];
             Rect topGroupRect = ((RectTransform)topGroup.Transform).rect;
 
-            // We calculate at what % of the screen the UI group is.
-            // Since Transform.position (0, 0, z) indicates a pixel at the middle of the screen and since each UI group can be offset differently, we need to do some algebra hacks.
-            // Reference resolution is 1920 x 1080, but Main canvas uses something more like 1815 x 1023 (?!). 907.5 is half of horizontal res, 511.5 half of vertical.
+            _overlay.x = 0f + topGroup.Position.x - topGroup.OffsetToZero.x;
+            _overlay.y = 0f + topGroup.Position.y - topGroup.OffsetToZero.y;
 
-            float topGroupPercent_X = (topGroup.Transform.position.x + 907.5f - (topGroup.ToCenterOffset.x + topGroupRect.width / 2)) / 1815.0f;            
-            _overlay.x = Screen.width * topGroupPercent_X;
-
-            // For Y, Transform.position and IMGUI coordinates are reversed. Transfer.position counts bottom-up and IMGUI draws up-bottom. So we reverse the percent.
-            float topGroupPercent_Y = (topGroup.Transform.position.y + 511.5f - topGroup.ToCenterOffset.y + topGroupRect.height / 2) / 1023.0f;            
-            _overlay.y = Screen.height * (1 - topGroupPercent_Y);
-
-            _overlay.width = topGroupRect.width * Manager.Instance.ScaleFactor;
-            _overlay.height = topGroupRect.height * Manager.Instance.ScaleFactor;
+            // Since IMGUI draws from the top-left corner and position is from the bottom-left, we need to inverse to y coordinate
+            _overlay.y = Screen.height - _overlay.y - (topGroupRect.height * Manager.Instance.ScaleFactor);
+            
+            _overlay.width = topGroupRect.width * Manager.Instance.ScaleFactor;            
+            _overlay.height = (topGroupRect.height + topGroup.ToMaxOffset.y) * Manager.Instance.ScaleFactor;
 
             var previousColor = GUI.color;
             // color the overlay in transparent yellow
@@ -177,6 +333,94 @@ namespace CustomizableUI
                 ""
                 );
             GUI.color = previousColor;
+        }
+
+        private void GroupLabel(string text)
+        {
+            GUILayout.Label(text, Styles.GroupLabel);
+        }
+
+        private bool SelectButton(string text)
+        {
+            return GUILayout.Button(text, Styles.SelectButton);
+        }
+
+        private bool NormalButton(string text)
+        {
+            return GUILayout.Button(text, Styles.NormalButton);
+        }
+
+        private void MoveButton(string text, string direction)
+        {
+            if (direction == "up")
+            {
+                if (GUILayout.RepeatButton(text, Styles.MoveButton))
+                    _nudgeUp = true;
+                else
+                    _nudgeUp = false;
+            }
+
+            if (direction == "down")
+            {
+                if (GUILayout.RepeatButton(text, Styles.MoveButton))
+                    _nudgeDown = true;
+                else
+                    _nudgeDown = false;
+            }
+
+            if (direction == "left")
+            {
+                if(GUILayout.RepeatButton(text, Styles.MoveButton))
+                    _nudgeLeft = true;
+                else
+                    _nudgeLeft = false;
+            }
+
+            if (direction == "right")
+            {
+                if(GUILayout.RepeatButton(text, Styles.MoveButton))
+                    _nudgeRight = true;
+                else
+                    _nudgeRight = false;
+            }
+        }
+
+        private bool JumpLeftRightButton(string text)
+        {
+            return GUILayout.Button(text, Styles.JumpLeftRightButton);
+        }
+
+        private bool JumpUpDownButton(string text)
+        {
+            return GUILayout.Button(text, Styles.JumpUpDownButton);
+        }
+
+        private string TextField(string text)
+        {
+            return GUILayout.TextField(text, Styles.SelectTextField);
+        }
+
+        private bool Toggle(bool value, string text)
+        {
+            return GUILayout.Toggle(value, text, Styles.AttachToggle);
+        }
+
+        private void PrintMessage(string text)
+        {
+            _message = text;
+            _messageTime = Time.time;
+        }
+
+        private bool CloseButton()
+        {
+            Rect rect = new Rect(Styles.WindowWidth - 22, 2, 20, 20);
+            return GUI.Button(rect, Styles.CloseButtonTexture, Styles.CloseButton);
+        }
+
+        private void CloseWindow()
+        {
+            GameObject.Find(CustomizableUIPlugin.ToolbarFlightButtonID)?.GetComponent<UIValue_WriteBool_Toggle>()?.SetValue(false);
+            IsWindowOpen = false;
         }
 
         /*
@@ -204,42 +448,5 @@ namespace CustomizableUI
             }
         }
         */
-
-        private void GroupLabel(string text)
-        {
-            GUILayout.Label(text, Styles.GroupLabel);
-        }
-
-        private bool SelectButton(string text)
-        {
-            return GUILayout.Button(text, Styles.SelectButton);
-        }
-
-        private bool NormalButton(string text)
-        {
-            return GUILayout.Button(text, Styles.NormalButton);
-        }
-
-        private string TextField(string text)
-        {
-            return GUILayout.TextField(text, Styles.SelectTextField);
-        }
-
-        private bool Toggle(bool value, string text)
-        {
-            return GUILayout.Toggle(value, text, Styles.AttachToggle);
-        }
-
-        private bool CloseButton()
-        {
-            Rect rect = new Rect(Styles.WindowWidth - 22, 2, 20, 20);
-            return GUI.Button(rect, Styles.CloseButtonTexture, Styles.CloseButton);
-        }
-
-        private void CloseWindow()
-        {
-            GameObject.Find(CustomizableUIPlugin.ToolbarFlightButtonID)?.GetComponent<UIValue_WriteBool_Toggle>()?.SetValue(false);
-            IsWindowOpen = false;
-        }
     }
 }

@@ -9,7 +9,7 @@ namespace CustomizableUI
     {
         private static Manager _instance;
         private ManualLogSource _logger = BepInEx.Logging.Logger.CreateLogSource("CustomizableUI.Manager");
-        private Canvas _mainCanvas => GameManager.Instance?.Game?.UI?._mainCanvas;
+        private Canvas _mainCanvas => GameManager.Instance?.Game?.UI?._scaledMainCanvas;
 
         public Transform FlightHud => _mainCanvas?.gameObject?.GetChild("FlightHudRoot(Clone)")?.transform;
         public List<TopLevelGroup> Groups { get; set; }
@@ -45,9 +45,9 @@ namespace CustomizableUI
         {
             try
             {
-                CreateGroups();
                 ScaleFactor = _mainCanvas.scaleFactor;
                 Resolution = _mainCanvas.renderingDisplaySize;
+                CreateGroups();                
                 IsInitialized = true;
 
                 _logger.LogInfo($"Initialization successful. Top level UI groups created: {Groups.Count}.");
@@ -90,6 +90,16 @@ namespace CustomizableUI
                 new Throttle(),
                 new AppBar()
             };
+
+            foreach (var group in Groups)
+            {
+                group.ToCenterOffset.x = group.ToCenterOffset.x * ScaleFactor;
+                group.ToCenterOffset.y = group.ToCenterOffset.y * ScaleFactor;
+                group.OffsetToZero.x = group.OffsetToZero.x * ScaleFactor;
+                group.OffsetToZero.y = group.OffsetToZero.y * ScaleFactor;
+                group.ToMaxOffset.x = group.ToMaxOffset.x * ScaleFactor;
+                group.ToMaxOffset.y = group.ToMaxOffset.y * ScaleFactor;
+            }
         }
 
         public void RecalculatePositionsOfGroupsAttachedToNavball(TopLevelGroup topGroup, Vector3 previousPosition)

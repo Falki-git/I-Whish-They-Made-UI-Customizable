@@ -71,7 +71,7 @@ namespace CustomizableUI
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error saveing data. Full error:\n" + ex);
+                _logger.LogError("Error saving data. Full error:\n" + ex);
             }
         }
 

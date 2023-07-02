@@ -21,6 +21,11 @@ namespace CustomizableUI
         public static GUIStyle SelectTextField;
         public static GUIStyle GroupLabel;
         public static GUIStyle AttachToggle;
+        public static GUIStyle BaseButton;
+        public static GUIStyle MoveButton;
+        public static GUIStyle JumpLeftRightButton;
+        public static GUIStyle JumpUpDownButton;
+        public static GUIStyle MessageLabel;
 
         public static Texture2D CloseButtonTexture;
 
@@ -69,6 +74,38 @@ namespace CustomizableUI
 
             AttachToggle = new GUIStyle(SpaceWarpUISkin.toggle)
             { };
+
+            BaseButton = new GUIStyle(SpaceWarpUISkin.button)
+            {
+                margin = new RectOffset(),
+                padding = new RectOffset(),
+            };
+            
+            MoveButton = new GUIStyle(BaseButton)
+            {
+                fixedWidth = 40,
+                fixedHeight = 40,
+                fontSize = 30
+            };
+
+            JumpLeftRightButton = new GUIStyle(BaseButton)
+            {
+                fixedWidth = 40,
+                fixedHeight = 120,
+                margin = new RectOffset(5, 5, 0, 0),
+                fontSize = 40
+            };
+
+            JumpUpDownButton = new GUIStyle(BaseButton)
+            {
+                fixedWidth = 120,
+                fixedHeight = 40,
+                margin = new RectOffset(0, 0, 5, 5),
+                fontSize = 40
+            };
+
+            MessageLabel = new GUIStyle(SpaceWarpUISkin.label);
+            MessageLabel.normal.textColor = Color.green;
         }
 
         private static void InitializeTextures()
