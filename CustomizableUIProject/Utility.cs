@@ -92,7 +92,7 @@ namespace CustomizableUI
             }
             catch (FileNotFoundException ex)
             {
-                _logger.LogWarning($"Error loading data. File was not found at the expected location. Full error:\n" + ex);
+                _logger.LogWarning($"SavedData.json file was not found at the expected location during loading. This is normal if this mod was just installed.");
 
             }
             catch (Exception ex)
