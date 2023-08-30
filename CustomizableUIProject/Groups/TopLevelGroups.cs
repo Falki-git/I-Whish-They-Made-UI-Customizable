@@ -106,7 +106,7 @@ namespace CustomizableUI
 
     public class BurnTimer : TopLevelGroup
     {
-        public BurnTimer() : base("group_burntimer(Clone)", 1)
+        public BurnTimer() : base("group_burntimer(Clone)", 0)
         {
             ToCenterOffset.x = 0f;
             ToCenterOffset.y = 0f;
