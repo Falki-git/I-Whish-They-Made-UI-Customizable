@@ -7,7 +7,7 @@ namespace CustomizableUI
     {
         private ManualLogSource _logger = BepInEx.Logging.Logger.CreateLogSource("CustomizableUI.ChildGroup");
 
-        public BaseGroup Parent;        
+        public BaseGroup Parent;
 
         public ChildGroup() { }
 

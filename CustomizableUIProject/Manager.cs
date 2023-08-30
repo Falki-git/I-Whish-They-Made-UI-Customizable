@@ -47,7 +47,7 @@ namespace CustomizableUI
             {
                 ScaleFactor = _mainCanvas.scaleFactor;
                 Resolution = _mainCanvas.renderingDisplaySize;
-                CreateGroups();                
+                CreateGroups();
                 IsInitialized = true;
 
                 _logger.LogInfo($"Initialization successful. Top level UI groups created: {Groups.Count}.");

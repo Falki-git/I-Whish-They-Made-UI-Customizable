@@ -317,7 +317,7 @@ namespace CustomizableUI
             _overlay.x = 0f + topGroup.Position.x - topGroup.OffsetToZero.x;
             _overlay.y = 0f + topGroup.Position.y - topGroup.OffsetToZero.y;
 
-            // Since IMGUI draws from the top-left corner and position is from the bottom-left, we need to inverse to y coordinate
+            // Since IMGUI draws from the top-left corner and position is from the bottom-left, we need to inverse the y coordinate
             _overlay.y = Screen.height - _overlay.y - (topGroupRect.height * Manager.Instance.ScaleFactor);
             
             _overlay.width = topGroupRect.width * Manager.Instance.ScaleFactor;            

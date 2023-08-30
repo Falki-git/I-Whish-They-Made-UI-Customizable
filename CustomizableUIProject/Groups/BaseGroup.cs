@@ -12,7 +12,7 @@ namespace CustomizableUI
         private Vector3 _moveDown = new Vector3(0f, -1f, 0f);
 
         [JsonProperty]
-        public string Name;        
+        public string Name;
         public Transform Transform;
         [JsonProperty]
         public List<ChildGroup> Children;
@@ -47,7 +47,7 @@ namespace CustomizableUI
                 isActive = value;
                 Transform?.gameObject?.SetActive(value);
             }
-        }            
+        }
 
         public override string ToString()
         {
