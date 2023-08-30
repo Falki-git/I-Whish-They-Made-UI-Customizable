@@ -46,7 +46,7 @@ public class CustomizableUIPlugin : BaseSpaceWarpPlugin
         );
 
         SubscribeToMessages();
-        Styles.Initialize();        
+        Styles.Initialize();
     }
 
     private void SubscribeToMessages()
@@ -59,7 +59,7 @@ public class CustomizableUIPlugin : BaseSpaceWarpPlugin
         catch(Exception ex)
         {
             _logger.LogInfo($"Error subscribing to GameStateEntered message.\n{ex}");
-        }        
+        }
     }
 
     private void OnGUI()
