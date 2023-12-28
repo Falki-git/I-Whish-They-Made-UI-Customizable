@@ -21,6 +21,7 @@ namespace CustomizableUI
         public Vector2 ToCenterOffset;
         public Vector2 OffsetToZero;
         public Vector2 ToMaxOffset;
+        public Vector2 OverlayOffset;
         [JsonProperty]
         public Vector3 Position;
         [JsonProperty]

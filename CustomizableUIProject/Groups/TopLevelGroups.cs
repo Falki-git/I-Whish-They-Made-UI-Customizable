@@ -61,6 +61,8 @@ namespace CustomizableUI
             ToCenterOffset.y = -15;
             OffsetToZero.x = 0;
             OffsetToZero.y = 0;
+            OverlayOffset.x = -90;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -75,6 +77,8 @@ namespace CustomizableUI
             ToMaxOffset.x = 20;
             ToMaxOffset.y = -39;
             AttachToNavball = true;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = -10;
         }
     }
 
@@ -88,6 +92,8 @@ namespace CustomizableUI
             OffsetToZero.y = 0;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -101,6 +107,8 @@ namespace CustomizableUI
             OffsetToZero.y = 524;
             ToMaxOffset.x = -139;
             ToMaxOffset.y = 46;
+            OverlayOffset.x = 90;
+            OverlayOffset.y = 10;
         }
     }
 
@@ -114,6 +122,8 @@ namespace CustomizableUI
             OffsetToZero.y = 0;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = -270;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -127,6 +137,8 @@ namespace CustomizableUI
             OffsetToZero.y = 0;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = -210;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -141,6 +153,8 @@ namespace CustomizableUI
             ToMaxOffset.x = 16;
             ToMaxOffset.y = -39;
             AttachToNavball = true;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = 0;
         }
     }
     public class IvaPortraits : TopLevelGroup
@@ -153,6 +167,8 @@ namespace CustomizableUI
             OffsetToZero.y = 120;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = 150;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -166,6 +182,8 @@ namespace CustomizableUI
             OffsetToZero.y = 0;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -179,6 +197,8 @@ namespace CustomizableUI
             OffsetToZero.y = 216;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = -50;
         }
     }
 
@@ -192,6 +212,8 @@ namespace CustomizableUI
             OffsetToZero.y = 120;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -205,6 +227,8 @@ namespace CustomizableUI
             OffsetToZero.y = 0;
             ToMaxOffset.x = -73;
             ToMaxOffset.y = -20;
+            OverlayOffset.x = 50;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -218,6 +242,8 @@ namespace CustomizableUI
             OffsetToZero.y = -24;
             ToMaxOffset.x = 57;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = -200;
+            OverlayOffset.y = 0;
         }
     }
 
@@ -232,6 +258,8 @@ namespace CustomizableUI
             ToMaxOffset.x = 15;
             ToMaxOffset.y = -197;
             AttachToNavball = true;
+            OverlayOffset.x = -20;
+            OverlayOffset.y = -20;
         }
     }
 
@@ -252,6 +280,8 @@ namespace CustomizableUI
             OffsetToZero.y = 0;
             ToMaxOffset.x = 0;
             ToMaxOffset.y = 0;
+            OverlayOffset.x = 0;
+            OverlayOffset.y = 0;
         }
     }
 }

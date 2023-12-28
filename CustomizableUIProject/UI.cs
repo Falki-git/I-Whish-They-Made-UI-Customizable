@@ -314,8 +314,8 @@ namespace CustomizableUI
             var topGroup = Manager.Instance.Groups[TopLevelGroup.SelectedIndex];
             Rect topGroupRect = ((RectTransform)topGroup.Transform).rect;
 
-            _overlay.x = 0f + topGroup.Position.x - topGroup.OffsetToZero.x;
-            _overlay.y = 0f + topGroup.Position.y - topGroup.OffsetToZero.y;
+            _overlay.x = 0f + topGroup.Position.x - topGroup.OffsetToZero.x + topGroup.OverlayOffset.x;
+            _overlay.y = 0f + topGroup.Position.y - topGroup.OffsetToZero.y + topGroup.OverlayOffset.y;
 
             // Since IMGUI draws from the top-left corner and position is from the bottom-left, we need to inverse the y coordinate
             _overlay.y = Screen.height - _overlay.y - (topGroupRect.height * Manager.Instance.ScaleFactor);
