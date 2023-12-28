@@ -8,7 +8,7 @@ You can move any UI group in the flight scene wherever you want. Maybe you'd rat
 
 
 ## Things to note
-- open the mod window by selecting it from the app bar
+- open the mod window by selecting it from the app bar or by pressing CTRL + I
 - when you're satisfied with what you changed remember to save the UI by pressing the Save button
 - if you messed up and want to revert to default press the FUBAR button
 - pressing Reset resets the position of the currently selected UI group
